@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Firebase Chat App | Message For Real</title>
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+</head>
+<body>
+    <div class="info" id="info">
+      Hi, I'm Sakindu 😅<br>
+      and this is my second code in Sololearn..<br>
+      <b>The following are some instructions on how to use the UI:</b><br>
+      <br>
+      Firstly, You SHOULD have the link to your Sololearn Profile. It should be something like this:<mark>https://sololearn.com/Profile/20354365</mark>(NOTE:This is the link to my profile).<br><br>
+      Then, grab/take/copy only the id which is the number in the link to your profile.<mark>20354365</mark><br><br>
+      After that, <b>paste that ID in the SECOND input of the LOGIN section...And Make sure that you have typed in the correct ID so your <b>SL profile pic</b> will load correctly!!!(IF IT IS NOT THE CORRECT ID, IT WILL SHOW A DEFAULT IMAGE)</b><br><br>
+      <b>That's it!!!</b> So your messages will be saved in that id and you can LOGIN again with that id...<br><br><br>
+      NOTE: Don't type in Abusive/Bad stuff as messages!!! If typed, it will be DELETED...<br>
+      <button class="login-submit" onclick="getIn()">GET IN</button>
+    </div>
+    <div class="chat" id="chat">
+      <div class="name-bar">
+        <img src="https://pbs.twimg.com/profile_images/378800000242038210/3c561ae8a8bbf4d8f7c3428e49a92e51_400x400.png" alt="icon" class="group-img">
+        <span class="grp-name">Sololearners</span>
+      </div>
+      <div class="msgs" id="msgs">
+          
+      </div>
+
+    
+    <div class="msg-input">
+        <form name="msg-form" class="msg-form" onsubmit="return sendMessage()">
+            <div class="clip" id="addemoji"><i class="far fa-smile fa-2x send-msg"></i></div>
+            <input type="text" required id="input" class="inp" placeholder="Type a message..">
+            <button class="div-send" type="submit" id="send"><i class="fab fa-telegram-plane fa-2x send-msg"></i></button>
+        </form>
+    </div>
+    </div>
+    <div class="login">
+      <div class="login-container">
+      <div class="pic-container">
+        <img src="https://thumbs.dreamstime.com/z/user-icon-person-profile-sign-vector-avatar-user-icon-person-profile-sign-vector-avatar-illustration-124240309.jpg" alt="profile-img" class="login-img">
+      </div>
+      <form class="login-form" onsubmit="return login()">
+        <input type="text" id="login-name" class="login-name" placeholder="Name" required><br>
+        <input type="text" id="login-id" class="login-id" placeholder="Sololearn Profile Id" required><br>
+        <button type="submit" class="login-submit">Login</button>
+      </form><br><br>
+      <span class="copyright">&copy; 2020 {$@k!ndu-d}</span>
+      </div>
+    </div>
+    
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+ 
+
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
+
+apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
+    measurementId: "G-GG3WBK1FGJ"
+ 
+<script>
+  var _0x2792=['AIzaSyCR4DiQzgvieXWpvc8on1hGGfR7WkFpXko','1:187708856407:web:4d00c4fcbfb82be7a9eb12','initializeApp','worldchat-712fa','https://worldchat-712fa.firebaseio.com/'];(function(_0x286df5,_0x4f4eaf){var _0x27924f=function(_0x2b9dd9){while(--_0x2b9dd9){_0x286df5['push'](_0x286df5['shift']());}};_0x27924f(++_0x4f4eaf);}(_0x2792,0x8e));var _0x2b9d=function(_0x286df5,_0x4f4eaf){_0x286df5=_0x286df5-0x16e;var _0x27924f=_0x2792[_0x286df5];return _0x27924f;};var _0x517369=_0x2b9d,firebaseConfig={'apiKey':_0x517369(0x171),'authDomain':'worldchat-712fa.firebaseapp.com','databaseURL':_0x517369(0x170),'projectId':_0x517369(0x16f),'storageBucket':'worldchat-712fa.appspot.com','messagingSenderId':'187708856407','appId':_0x517369(0x172)};firebase[_0x517369(0x16e)](firebaseConfig);
+    
+    function scrolldown(){
+      document.getElementById("msgs").scrollTop = document.getElementById("msgs").scrollHeight;
+    }
+    
+</script>
+<script>
+  alert("Make sure that you have the link to your Sololearn profile and remember to put the correct id in the input because messages you typed and the profile pic will be loaded by the id!!!\n\nWhat you can do 🔥🔥🔥:\nMessage for REAL!!! (It's a GROUP Chat..You can even include HTML markup in the messages!!!)\n\nFurther information:\nThis project uses Firebase as the Back-end😅\nPls Read the instructions in the NEXT section..\nSometimes it may refresh when you try to Login, I don't know why...\n\nI hope you will like it 🔥!!\nIf you like it, plz give an upvote and leave a comment!!!😊😊😊")
+    function getIn(){
+      $("#info").css("left","-100%")
+    }
+    function sendMessage() {
+        
+        firebase.database().ref("messages").push().set({
+            "id":$("#login-id").val(),
+            "sender": $("#login-name").val(),
+            "message": $("#input").val()
+        });
+        $("#input").val("")
+        scrolldown();
+        return false;
+        
+    }
+    function login() {
+      var n = $(".msg-"+$("#login-id").val());
+      n.removeClass("others-msg").addClass("my-msg")
+      $("#chat").css("right","0%");
+      return false;
+    }
+    
+</script>
+<script>
+
+  var val,html
+    firebase.database().ref("messages").on("child_added",(snapshot) => {
+      const id = document.getElementById("login-id").value
+        if (snapshot.val().id == id) {
+            html = `
+            <div class="my-msg"><span class="my-name"><img src="https://api.sololearn.com/Uploads/Avatars/${snapshot.val().id}.jpg" alt="" class="pic">${snapshot.val().sender}</span><br> ${snapshot.val().message}</div><br>
+            `;
+            document.getElementById("msgs").innerHTML += html;
+        }
+        else{
+          html = `
+          <div class="others-msg msg-${snapshot.val().id}"><span class="sender-name"><img src="https://api.sololearn.com/Uploads/Avatars/${snapshot.val().id}.jpg" alt="" class="pic">${snapshot.val().sender}</span><br>${snapshot.val().message}</div><br>
+            `;
+            
+            document.getElementById("msgs").innerHTML += html;
+        }
+        var z = document.getElementsByClassName("pic")
+        for(let i of z){
+          i.onerror = ()=>{
+            i.setAttribute("src","https://www.flaticon.com/premium-icon/icons/svg/666/666201.svg")
+            i.style.border = "transparent"
+          }
+        }
+        scrolldown();
+        
+        
+    });
+    
+    document.getElementById("addemoji").onclick = () => {
+        let arr = ['🙂','😆','😍','😘','😑','😜','😅','✌️','🤪','🤟','😢','😡','😊','👍']
+
+        document.getElementById("input").value += arr[Math.floor(Math.random() * 14)];
+        document.getElementById("input").focus()
+    }
+</script>
+<script
+    src="https://kit.fontawesome.com/836a943e18.js"
+    crossorigin="anonymous">
+      alert("PLS DON'T WASTE THE DATABASE STORAGE BY TYPING IN UNNESSCARY MESSAGES!!!")
+    </script>
+    <style type="text/css">
+      body{
+  
+  overflow-x: hidden;
+}
+.msgs{
+  -ms-overflow-style: none; 
+    scrollbar-width: none;  
+  margin:5px 20px;
+  color:#fffafa;
+  font-family: sans-serif;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 76%;
+  min-height: 60%;
+  padding: 10px 0px 10px 0;
+  
+  scroll-behavior: smooth;
+}
+.msgs::-webkit-scrollbar{
+  display: none;
+}
+.others-msg{
+  word-wrap: break-word;
+  background: rgba(190, 190, 190, 0.61);
+  border-radius: 10px 10px 10px 0;
+  padding: 8px 10px;
+  max-width: 48%;
+  display: block;
+  color: #000;
+}
+.my-msg{
+  margin-left:auto;
+   margin-right:0;
+   background:rgba(0, 122, 221, 0.733);
+  border-radius: 10px 10px 0px 10px;
+  padding: 8px 10px;
+  
+  max-width: 48%;
+  display: block;
+  word-wrap: break-word;
+}
+.others-msg a{
+  color:rgb(12, 88, 175);
+  text-decoration: none;
+  word-wrap: break-word;
+}
+.others-msg img{
+  max-width: 80%;
+  max-height: 90%;
+  border-radius: 7px;
+}
+.my-msg a{
+  color:rgb(172, 0, 106);
+  text-decoration: none;
+}
+.my-msg img{
+  max-width: 80%;
+  max-height: 90%;
+  border-radius: 7px;
+}
+
+.msg-input{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.705);
+  height: 10%;
+  
+  border-top: 2px solid rgba(37, 36, 37, 0.24);
+  
+}
+
+.msg-form{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.inp{
+  height:70%;
+  border-radius: 40px;
+  margin: 5px 5px;
+  width: 70%;
+  background: #c2c0c0c0;
+  border:2px solid rgba(31, 29, 30, 0.233);
+  color:rgb(2, 2, 2);
+  padding-left: 10px;
+  transition: 0.3s ease;
+}
+::-webkit-scrollbar{
+  display: none;
+}
+.inp:hover{
+  background: rgba(133, 133, 133, 0.644);
+  border-radius: 3px;
+}
+.clip{
+  width:50px;
+   height: 50px;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border:2.5px solid rgba(0, 0, 0, 0.452);
+   transition: 0.4s ease;
+   cursor: pointer;
+   margin-left: 5px;
+   background: rgba(0, 0, 0, 0.096);
+  color:#1b1919a4;
+}
+.clip:hover{
+  background: #000;
+  color:#fafafa;
+  border-radius: 0;
+}
+.div-send{
+  margin-left:auto;
+   margin-right:6px;
+   width:55px;
+   height: 55px;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border:2.5px solid rgba(0, 0, 0, 0.452);
+   transition: 0.4s ease;
+   cursor: pointer;
+   background: rgba(0, 0, 0, 0.096);
+   color:#1b1919a4;
+}
+.div-send:hover{
+  background: #000;
+  color:#fafafa;
+  border-radius: 0;
+}
+.div-send:focus{
+  outline: none;
+}
+#input::placeholder { 
+  color:rgb(37, 36, 36);
+   
+}
+.chat{
+     width: 100%;
+     height: 100vh;
+     background-image:  url(https://i.pinimg.com/564x/85/70/f6/8570f6339d3189c96e340d47a581d3b8.jpg);
+     right: -100%;
+     transition: 0.3s ease;
+     position: fixed;
+     top: 0;
+     z-index: 10;
+}
+.sender-name{
+    font-size: 10px;
+    color: rgba(13, 14, 14, 0.836);
+    display: flex;
+    align-items: center;
+    gap: 2%;
+}
+.my-name{
+    font-size: 12px;
+    color: rgba(240, 255, 255, 0.836);
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 2%;
+}
+    .inp:focus{
+        outline: none;
+        border: 2px solid rgba(0, 0, 0, 0.527);
+    }
+    .login-img{
+      height: 100px;
+      width: 100px;
+      border-radius: 50px;
+      transform: translateY(-50px);
+      box-shadow: 0 -3px 20px 6px rgba(128, 128, 128, 0.377);
+      transition: 0.3s ease;
+    }
+    .login-img:hover{
+      transform: translateY(-60px);
+    }
+    .login{
+      height: 100vh;
+      width: 100vw;
+      left: 0;
+      top: 0;
+      position: fixed;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      background-image: url(https://image.freepik.com/free-vector/social-media-background_1017-7007.jpg);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .login-form input::placeholder{
+      color: #fafafade;
+    }
+  .login-submit{
+    padding: 10px 40px;
+    border-radius: 30px;
+    color: #000000;
+    font-family: sans-serif;
+    background-color: #e6f701;
+    margin-top: 48px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 15px;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  .login-submit:hover{
+    color: #fff;
+    background-color: #000;
+    transform: translateY(-5px);
+    border-radius: 2px;
+    box-shadow: 0 0 40px 3px rgb(0, 0, 0);
+  }
+  .login-submit:focus{
+    outline: none;
+  }
+    .login-form input:focus{
+      outline: none;
+      border-bottom: 3px solid #fff;
+    }
+    .login-name,.login-id{
+      height: 30px;
+      border: transparent;
+      background-color: transparent;
+      color: white;
+      transition: 0.5s ease;
+      border-bottom: 2px solid rgb(224, 224, 224);
+      padding-left: 5px;
+      margin-top: 30px;
+      width: 80%;
+    }
+    .login-container{
+      text-align: center;
+      backdrop-filter: blur(3px) brightness(60%);
+      padding:0 20px 40px 20px;
+      border-radius: 5px;
+      box-shadow: 0 20px 30px rgba(128, 128, 128, 0.534);
+      width: 60%;
+    }
+    .pic{
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.842);
+    }
+    .copyright{
+      font-size: 15px;
+      color: #fafafa;
+      font-family: monospace;
+      letter-spacing: 0.7px;
+      margin-top: 20px;
+    }
+    .name-bar{
+      width: 100%;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+      background: rgba(255, 255, 255, 0.288);
+      backdrop-filter: blur(1px) brightness(80%);
+    }
+    .group-img{
+      height: 55px;
+      width: 55px;
+      border-radius: 27.5px;
+    }
+    .grp-name{
+      margin-left: 7px;
+      font-size: 20px;
+      font-family: sans-serif;
+    }
+    .info{
+      height: 100vh;
+      width: 100%;
+      background-image: linear-gradient(rgba(255, 255, 255, 0),rgba(0, 0, 0, 0.301)),url(https://i.pinimg.com/originals/c4/3e/a0/c43ea0308537fd01578f8d82fd0435d9.jpg);
+      position: absolute;
+      z-index: 11;
+      top: 0;
+      left: 0;
+      text-align: center;
+      padding-top: 90px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      transition: 0.4s ease-in;
+      font-size: 15px;
+    }
+    </style>
+</body>
+</html>
